@@ -1,0 +1,112 @@
+
+{% extends 'basic.html' %}
+{% block title %} Electronics Shop{% endblock %}  
+{% block css %}
+<style>
+     .col-md-3
+  {
+  display: inline-block;
+  margin-left:-4px;
+  }
+
+  .carousel-indicators .active {
+  background-color: blue;
+    }
+
+  .col-md-3 img{
+
+  max-width: 227px;
+  height: 242px;
+  }
+
+  body .carousel-indicator li{
+  background-color: blue;
+  }
+
+  body .carousel-indicators{
+  bottom: 0;
+  }
+
+  body .carousel-control-prev-icon,
+  body .carousel-control-next-icon{
+  background-color: blue;
+  top:auto;
+  bottom: auto;
+  }
+   body .no-padding{
+   padding-left: 0,
+   padding-right: 0;
+   }
+   footer
+    {
+            
+            bottom: 0px;
+            right: 0px;
+            left: 0px;
+            background-color: slategray;
+            width: auto;
+            bottom: 0px;
+    }    
+</style>
+{% endblock %}s
+{% block body %}
+      {{msg1}}
+  <div class="container">
+    <h1>Electronics Producs</h1>
+<div id="demo" class="carousel slide my-3" data-ride="carousel">
+    <ul class="carousel-indicators">
+      <li data-target="#demo" data-slide-to="0" class="active"></li>
+
+       {% for i in range %}
+      <li data-target="#demo" data-slide-to="{{i}}" ></li>
+      {% endfor %}
+    </ul>
+
+    <!--Slideshow starts here -->
+    <div class="container carousel-inner no-padding">
+
+      <div class="carousel-item active">
+
+        {% for i in product %}
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card align-items-center" style="width: 18rem;">
+            <img src='/media/{{i.img}}' class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title" id="namepr{{i.id}}">{{i.product_name}}</h5>
+              <h5>{{i.catagory}}</h5>
+              <a href="/productview/{{i.id}}">Quick view..AboutProduct</a>
+                <br>
+                <h4>₹RS.{{i.price}} </h4><br>
+                <form action="/cart/add/" method="post">{% csrf_token %}
+                    <b> Quantity : </b><input type="number" min="1" max="99" name="quantity" placeholder="1" required><br>
+                    <button class="btn btn-primary cart" value="{{ i.id }}" name=item> Add to Cart </button>
+                </form><br>
+                <p>{{i.product_discription}}</p>
+            </div>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+      </div><div class="carousel-item">
+        {% endif %}
+
+        {% endfor %}
+    </div>
+</div>
+</div>
+    <!-- left and right controls for the slide -->
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+{% endblock %}
+  
+

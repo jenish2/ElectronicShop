@@ -1,0 +1,63 @@
+{% extends 'basic.html' %}
+
+{% block title%} Cart {% endblock %}
+{% block css %}
+<style>
+    .gallery img{
+        max-width: 227px;
+        height: 242px;
+    }
+    footer
+    {
+        position: fixed;    
+            bottom: 0px;
+            right: 0px;
+            left: 0px;
+            background-color: slategray;
+            width: auto;
+            bottom: 0px;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<center>
+    <a href="/"><font color="blue" size=7 >continue shoping</font></a>
+    <br>
+    
+    <font color="red" size=5> {{ msg }} </font><br>
+    
+    {% for c in cart %}
+        <div class="gallery">
+            <a href="/view/?product={{ c.p_id.p_id }}" target="_blank">
+                <img src="/media/{{c.images}}"  alt="{{ c.item }}" title="{{ c.item }}">
+            </a>
+            <div class="desc">
+                <center><table>
+                    <tr><td> item </td><td> : {{ c.item }} </td> </tr>
+                    <tr><td> price </td><td> : <font color="#FF3232"><b> ₹ {{ c.price }} </b></font> </td> </tr>
+                    <tr><td> quantity </td><td> : {{ c.quantity }} </td> </tr>
+                </table></center>
+            </div>
+            <form action="/cart/remove/" method="post">{% csrf_token %}
+                <button class="btn btn-primary mx-3 my-4" value="{{ c.p_id_id }}" name=item> Remove </button>
+            </form>
+        </div>
+    {% endfor %}<br>
+    <div id=footer style="color: black">
+        <font size="5"> Total Amount : {{ total }} </font>
+        {% if total != 0 %}
+            <form action="/cart/payment/" method="Post"> {% csrf_token %}
+                <input type="submit" class="btn btn-primary mx-3 my-4"  value="Place Order" >
+            </form>
+        {% else %}
+            <form action="/cart/payment/" method="Post"> {% csrf_token %}
+                <input type="submit" class="btn btn-primary mx-3 my-4" value="Place Order" disabled>
+            </form>
+        {% endif %}
+        <br><br>
+    </div>
+    
+    <br>
+    <br>
+</center>
+{% endblock  %}

@@ -1,0 +1,65 @@
+{% extends 'basic.html' %}
+{% block title %} Payment {% endblock %}
+{% block css%}
+<style>
+ 	footer
+    {
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+            left: 0px;
+            background-color: slategray;
+            width: auto;
+            bottom: 0px;
+    }
+</style>
+{% endblock %}
+{% block body %}
+	<br>
+	<center>
+		<form method="post" action="/cart/bill/"> {% csrf_token %}
+			For Cash On Delivery : <input type="submit" value="COD" class=button><br>
+		</form>
+		<p> Pay Online (Debit Card):</p>
+		<form method="post" action="/cart/bill/"> {% csrf_token %}
+		Enter Card Number : <input type="text" name="card" placeholder="Debit or Credit card number" name="cnumber" required> <br><br>
+		Expiry date and CVV :
+						<select id="payselection" name="exmon" required>
+							<option hidden> MM </option>
+							<option value="1"> 1 </option>
+							<option value="2"> 2 </option>
+							<option value="3"> 3 </option>
+							<option value="4"> 4 </option>
+							<option value="5"> 5 </option>
+							<option value="6"> 6 </option>
+							<option value="7"> 7 </option>
+							<option value="8"> 8 </option>
+							<option value="9"> 9 </option>
+							<option value="10"> 10 </option>
+							<option value="11"> 11 </option>
+							<option value="12"> 12 </option>
+						</select>
+						<select id="payselection" name="exyear" required>
+							<option hidden> YYYY </option>
+							<option value="2018"> 2018 </option>
+							<option value="2019"> 2019 </option>
+							<option value="2020"> 2020 </option>
+							<option value="2021"> 2021 </option>
+							<option value="2022"> 2022 </option>
+							<option value="2023"> 2023 </option>
+							<option value="2024"> 2024 </option>
+							<option value="2025"> 2025 </option>
+							<option value="2026"> 2026 </option>
+							<option value="2027"> 2027 </option>
+							<option value="2028"> 2028 </option>
+							<option value="2029"> 2029 </option>
+							<option value="2030"> 2030 </option>
+							<option value="2031"> 2031 </option>
+						</select>
+						
+		<input type="password" class="cvv" placeholder="cvv" name="cvv" required><br><br>
+		Card Holder Name : <input type="text" name="hname" placeholder="as per bank record" name="uname" required> <br><br>
+		<input type="submit" value="make payment" class=button>
+		</form>
+	</center>
+{% endblock %}

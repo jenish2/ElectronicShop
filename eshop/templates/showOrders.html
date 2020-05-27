@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+      <title>User's Orders</title>
+      <style>
+       
+        .gallery img{
+        max-width: 227px;
+        height: 242px;
+        }
+      </style>
+    </head>
+    <body>
+    {% load static %}
+    {% csrf_token %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <font class="navbar-brand" >Electronics Shop</font>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        {% if user.is_authenticated %}
+            <li>
+                <font class="nav-link" color=pink font=4> Hello,{{user.username}}!!</font>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/owner">BACK TO OWNER'S PAGE</a>
+          </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login/logout">Logout</a>
+            </li>
+
+
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <h2><font color="red" >List of Orders:-</font></h2>
+    <center>
+    {% for c in so %}
+    <div class="gallery">
+        <a href="/view/?product={{ c.p_id.p_id }}" target="_blank">
+            <img src="/media/{{c.images}}"  alt="{{ c.item }}" title="{{ c.item }}">
+        </a>
+        <div class="desc">
+            <center>
+                <table>
+                    <tr><td> username </td><td> : {{ c.user_id }} </td> </tr>
+                    <tr><td> item </td><td> : {{ c.item }} </td> </tr>
+                    <tr><td> price </td><td> : <font color="#FF3232"><b> ₹ {{ c.price }} </b></font> </td> </tr>
+                    <tr><td> quantity </td><td> : {{ c.quantity }} </td> </tr>
+                    <tr><td> OrderDate </td><td> : {{ c.o_date }} </td> </tr>
+                    <br>
+                </table>
+            </center>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+    </center>
+    <footer style="background-color:slategray;">
+      <font size=3 color="white">
+      2019-2020  Electronics Shopping Website<br>
+      Company ©. All rights reserved
+  </footer>
+
+ </body>
+
+
+
+</html>

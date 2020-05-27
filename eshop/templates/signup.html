@@ -1,0 +1,164 @@
+{% extends 'basic.html' %}
+
+{% block title %} SignUp {% endblock %}
+{% block css %} 
+    <style>
+    .signup
+    {
+        box-shadow: 1px 5px 7px 10px rgb(211, 212, 212);
+        background-color: #e0f8fc;
+        display: flex;
+        flex-direction: column;
+        margin: 50px;
+        margin-left: 30%;
+        margin-right: 30%;
+        text-align: center;
+        align-items: center;
+        padding: 50px;
+        border-radius: 20px;
+        border: none;
+        height: auto;
+    }
+    .tr{
+        padding:50px;
+    }
+    input[type="text"],
+    [type="password"],
+    [type="email"],
+    [type="tel"],
+    [type="number"],
+    [type="date"],
+    [type="address"],
+    textarea.box {
+        border-radius: 10px;
+        border-color: #9494b8;
+        width: 250px;
+        padding: 10px;
+    }    
+    .button {
+        text-align: center;
+        background-color: white;
+        color: black;
+        border: 2px solid #9494b8;
+        width: 100px;
+        height: 35px;
+        border-radius: 5px;
+        -webkit-transition-duration: 0.4s;
+        transition-duration: 0.4s;
+    }
+
+    .button:hover {
+    background-color: #9494b8;
+    color: white;
+    }  
+    footer
+    {
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+            left: 0px;
+            background-color: slategray;
+            width: auto;
+            bottom: 0px;
+    }
+</style>
+{% endblock %}
+{% block body %}
+    <body>
+        <div class="signup">
+        <form action="createUser" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+            
+            <table border="0" align="center">
+                <th colspan="2" align="center">
+                    CREATE ACCOUNT
+                <th>
+                <tr>
+                    <td>
+                        NAME
+                    </td>
+                    <td>
+                        <input type="text" name="username">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        PASSWORD
+                    </td>
+                    <td>
+                        <input type="password" name="password">
+                    </td>
+                </tr>
+                <tr>
+                        <td>
+                            RE_ENTER_PASSWORD
+                        </td>
+                        <td>
+                            <input type="password" name="repassword">
+                        </td>
+                </tr>
+                <tr>
+                    
+                        <td>
+                            GENDER
+                        </td>
+                        <td>
+                                <input type="radio" id="male" name="gender" value="male">
+                                <span style="font-size:20px">
+                                    Male
+                                </span>
+                                <input type="radio" id="female" name="gender" value="female">
+                                <span style="font-size:20px">
+                                Female
+                                </span>
+                        </td>
+                </tr>
+                <tr>
+                    
+                        <td>
+                            MOBILE_NO
+                        </td>
+                        <td>
+
+                            <INPUT type="tel" name="mno">
+                        </td>
+                </tr>
+                <tr>
+                        <td>
+                                EMAIL
+                        </td>
+                        <td>
+                                <input type="email" name="email">
+                        </td>
+                </tr>
+                <tr>
+                    <td>
+                            ADDRESS
+                    </td>
+                    <td>
+                            <input type="address" name="address">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                            PROFILE IMAGE
+                    </td>
+                    <td>
+                        <input  type="file"   accept="image" name="cimg" >
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="CREATE" class="button">
+                    </td>
+               </tr>
+
+            </table>
+            </div>
+        </form>
+        <div>
+            {% for message in messages %}
+            <h3>{{message}}</h3>
+            {% endfor%}
+        </div>
+    </body>
+{% endblock %}

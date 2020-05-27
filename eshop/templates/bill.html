@@ -1,0 +1,56 @@
+{% extends 'basic.html' %}
+
+{% block title %} Cart {% endblock %}
+
+{% block css %} 
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'style2.css' %}"> 
+	<style>
+	 footer
+    {
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+            left: 0px;
+            background-color: slategray;
+            width: auto;
+            bottom: 0px;
+    }
+	</style>
+{% endblock %}
+{% block body %}
+	<center>
+	
+		<table style="font-size:25" cellpadding="10" id=bill>
+			<tr>
+				<th> Item </th>
+				<th> Price </th>
+				<th> Quantity </th>
+				<th> Total </th>
+
+			</tr>
+			{% for b in bill %}
+				<tr>
+					<td> {{ b.item }} </td>
+					<td> {{ b.price }} </td>
+					<td><center> {{ b.quantity }} </center></td>
+					<td> {% widthratio b.price 1 b.quantity %} </td>
+				</tr>
+			{% endfor %} 
+			<tr></tr>
+			<tr>
+				<td></td>
+				<td> </td>
+				<td> Total : </td>
+				<td>  {{ total }} </td>
+			</tr>
+		</table>
+	
+		<br><br>
+		<font size=5><b> To complete Order Click here : </b></font>
+				<form action="/cart/place/" method="Post">
+					{% csrf_token %}
+					<input type="submit" class=button value="Place Order" disable>
+				</form>
+	</center>
+{% endblock %}

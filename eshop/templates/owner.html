@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+      <title>Owner</title>
+      <style>
+        footer
+        {
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+            left: 0px;
+            background-color: slategray;
+            width: auto;
+            bottom: 0px;
+        }
+      </style>
+
+    </head>
+    <body>
+    {% load static %}
+    {% csrf_token %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <font class="navbar-brand" >Electronics Shop</font>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+      
+        {% if user.is_authenticated %}
+            <li>
+              <font class="nav-link" color=pink font=4> Hello,{{user.username}}!!</font>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login/logout">Logout</a>
+            </li>
+
+
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <h2><font color="red" >Owner Dashboad--Owner of Site</font></h2>
+    <center>
+        <a href="/owner/showQuery"><button class="btn btn-primary mx-3 my-4"> See Querys of Users </button></a>{% csrf_token %}
+        <br>
+       
+       
+        <a href="/owner/showOrder"><button class="btn btn-primary mx-3 my-4"> See Orders </button></a>
+        <br>
+        
+        
+        <a href="/owner/showUser"><button class="btn btn-primary mx-3 my-4"> See Users </button></a>
+        <br>
+       
+       
+        <a href="/owner/addProduct"><button class="btn btn-primary mx-3 my-4"> Add Product </button></a>
+         <br>
+        
+       
+        <a href="/owner/removeProduct"><button class="btn btn-primary mx-3 my-4"> Remove Product </button></a>
+         
+       
+
+
+    </center>
+    <footer style="background-color:slategray;">
+      <font size=3 color="white">
+      2019-2020  Electronics Shopping Website<br>
+      Company ©. All rights reserved
+  </footer>
+
+ </body>
+
+
+
+</html>

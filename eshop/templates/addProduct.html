@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+      <title>add Product</title>
+      <style>
+        .addProduct
+        {
+            box-shadow: 1px 5px 7px 10px rgb(211, 212, 212);
+            background-color: #e0f8fc;
+            display: flex;
+            flex-direction: column;
+            margin: 50px;
+            margin-left: 30%;
+            margin-right: 30%;
+            text-align: center;
+            align-items: center;
+            padding: 50px;
+            border-radius: 20px;
+            border: none;
+            height: auto;
+        }
+        .tr{
+         padding:50px;
+        }
+    input[type="text"],
+    [type="password"],
+    [type="email"],
+    [type="tel"],
+    [type="number"],
+    [type="date"],
+    [type="address"],
+    textarea.box {
+        border-radius: 10px;
+        border-color: #9494b8;
+        width: 250px;
+        padding: 10px;
+    }
+         footer
+        {
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+            left: 0px;
+            background-color: slategray;
+            width: auto;
+            bottom: 0px;
+        }
+      </style>
+
+    </head>
+    <body>
+    {% load static %}
+    {% csrf_token %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <font class="navbar-brand" >Electronics Shop</font>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        {% if user.is_authenticated %}
+            <li>
+                <font class="nav-link" color=pink font=4> Hello,{{user.username}}!!</font>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/owner">BACK TO OWNER'S PAGE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login/logout">Logout</a>
+            </li>
+
+
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <h2><font color="red" >Add Product:-</font></h2>
+    <center>
+        <div>
+            
+            <h3>{{m}}</h3>
+            
+        </div>
+        <div class="addProduct">
+            <form action="add" method="POST" enctype="multipart/form-data" > {% csrf_token %}
+                
+                <table border="0" align="center">
+                    <th colspan="2" align="center">
+                        ADD PRODUCT
+                    <th>
+                    <tr>
+                        <td>
+                            Product_Number:-
+                        </td>
+                        <td>
+                            <input type="text" name="product_number" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Product_Name:-
+                        </td>
+                        <td>
+                            <input type="text" name="product_name" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Product_Catagory:-
+                        </td>
+                        <td>
+                            <input type="text" name="catagory" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Product_Price:-
+                        </td>
+                        <td>
+                            <input type="number" name="price" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Product_Discription:-
+                        </td>
+                        <td>
+                            <input type="text" name="product_discription" required>
+                        </td>
+                    </tr>
+                        
+                    <tr>
+                        <td>
+                                Product_Image:-
+                        </td>
+                        <td>
+                            
+                                    <input  type="file"   accept="image" name="img" >
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="submit" value="ADD " class="btn btn-primary mx-3 my-4">
+                        </td>
+                   </tr>
+    
+                </table>
+                </div>
+            </form>
+    </center>
+    <footer style="background-color:slategray;">
+      <font size=3 color="white">
+      2019-2020  Electronics Shopping Website<br>
+      Company ©. All rights reserved
+  </footer>
+
+ </body>
+
+
+
+</html>
+

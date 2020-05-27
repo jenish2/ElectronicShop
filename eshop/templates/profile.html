@@ -1,0 +1,69 @@
+{% extends 'basic.html' %}
+
+{% block title %} Profile {% endblock %}
+{% block css %}  
+<style>
+ 	
+     img{
+        max-width: 227px;
+        height: 242px;
+    }
+</style>
+{% endblock %}
+
+{% block body %} 
+{% for u in un %}
+<font color="red"><h2>Yor Profile Information:-</h2></font>
+	<center>
+		<font color="red" size=4> {{ msg }}</font><br><br>
+		<font color="green" size=4> {{ msg1 }} </font><br>
+		<table>
+			<tr>
+				<td> <font size=6>Profie Picture :</font> </td>
+				<td><img src="/media/{{u.cimg}}"></td>
+			</tr>
+			<tr>
+				<td> <font size=6>User Name :</font> </td>
+				<td> <font size=6>{{ u.customer_name }} </font></td>
+			</tr>
+			<tr>
+				<td> <font size=6>Mobile Number : </font></td>
+				<td> <font size=6>{{ u.mobile_no }} </font></td>
+			</tr>
+			<tr>
+				<td> <font size=6>Email Address : </font></td>
+				<td> <font size=6>{{ u.email }} </font></td>
+			</tr>
+			<tr>
+				<td> <font size=6>Gender : </font></td>
+				<td> <font size=6>{{ u.gender }} </font></td>
+			</tr>
+			<tr>
+				<td> <font size=6>address : </font></td>
+				<td> <font size=6>{{ u.address }} </font></td>
+			</tr>
+		</table>
+		<br><br>
+	</center>
+{% endfor %}
+	<hr><hr>
+	<font color="red"><h2>Yor Previous Orders:-</h2></font>
+	<center>
+		{% for c in uo %}
+			<div class="gallery">
+				<a href="/view/?product={{ c.p_id.p_id }}" target="_blank">
+					<img src="/media/{{c.images}}"  alt="{{ c.item }}" title="{{ c.item }}">
+				</a>
+				<div class="desc">
+					<center>
+						<table>
+							<tr><td> item </td><td> : {{c.item}} </td> </tr>
+							<tr><td> price </td><td> : <font color="#FF3232"><b> ₹ {{c.price}} </b></font></td> </tr>
+							<tr><td> quantity </td><td> : {{c.quantity}} </td> </tr>
+						</table>
+					</center>
+				</div>
+			</div>
+		{% endfor %}
+	</center>
+{% endblock %}

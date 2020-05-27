@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+      <title>User's List</title>
+      <style>
+         footer
+        {
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+            left: 0px;
+            background-color: slategray;
+            width: auto;
+            bottom: 0px;
+        }
+        img{
+        max-width: 227px;
+        height: 242px;
+        }
+      </style>
+
+    </head>
+    <body>
+    {% load static %}
+    {% csrf_token %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <font class="navbar-brand" >Electronics Shop</font>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        {% if user.is_authenticated %}
+            <li>
+                <font class="nav-link" color=pink font=4> Hello,{{user.username}}!!</font>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/owner">BACK TO OWNER'S PAGE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login/logout">Logout</a>
+            </li>
+
+
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <h2><font color="red" >List of Users:-</font></h2>
+    
+    {% for u in su %}
+    <center>
+    <table>
+        <tr>
+            <td> <font size=3>User Picture :-</font> </td>
+            <td> <img src="/media/{{u.cimg}}"  ></td>
+        </tr>
+        <tr>
+            <td> <font size=3>User Name :-</font> </td>
+            <td> <font size=3>{{ u.customer_name }} </font></td>
+        </tr>
+        <tr>
+            <td> <font size=3>Mobile Number :- </font></td>
+            <td> <font size=3>{{ u.mobile_no }} </font></td>
+        </tr>
+        <tr>
+            <td> <font size=3>Email Address :- </font></td>
+            <td> <font size=3>{{ u.email }} </font></td>
+        </tr>
+        <tr>
+            <td> <font size=3>Gender :-</font></td>
+            <td> <font size=3>{{ u.gender }} </font></td>
+        </tr>
+        <tr>
+            <td> <font size=3>Delivery Address:-</font></td>
+            <td> <font size=3>{{ u.address }} </font></td>
+        </tr>
+    </table>
+        <br><hr><br>
+    </center>
+    {% endfor %}
+    
+    <footer style="background-color:slategray;">
+      <font size=3 color="white">
+      2019-2020  Electronics Shopping Website<br>
+      Company ©. All rights reserved
+  </footer>
+
+ </body>
+
+
+
+</html>
